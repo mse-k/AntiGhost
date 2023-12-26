@@ -37,7 +37,7 @@ sourceCompatibility = 17
 targetCompatibility = 17
 
 ext.Versions = new Properties()
-Versions.load(file("Versionfiles/mcversion-1.20.4.properties").newReader())
+Versions.load(file("Versionfiles/mcversion-1.20.2.properties").newReader())
 
 archivesBaseName = "antighost"
 ext.projectVersion = "1.1.5"
@@ -77,25 +77,3 @@ processResources {
         dependsOn downloadTranslations
 }
 
-import com.modrinth.minotaur.TaskModrinthUpload
-
-modrinth {
-    projectId = 'antighost'
-    versionName = 'antighost'
-    uploadFile = remapJar
-}
-
-curseforge {
-    apiKey = System.getenv("CURSEFORGE_TOKEN") ?: "0"
-    project {
-        id = '273279'
-        releaseType = 'release'
-        addGameVersion("${Versions['minecraft_version']}")
-        addGameVersion("Java "+targetCompatibility)
-        addGameVersion("Fabric")
-        mainArtifact(remapJar)
-    }
-    options {
-        forgeGradleIntegration = false
-    }
-}
